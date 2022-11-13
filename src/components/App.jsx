@@ -45,31 +45,6 @@ export class App extends Component {
         this.setState({ loading: false });
       }
     }
-
-    // if (prevState.pictureName !== pictureName) {
-    //   this.setState({
-    //     loading: true,
-    //     error: null,
-    //     pictures: [],
-    //     page: 1,
-    //     showBtn: true,
-    //   });
-    //   try {
-    //     data = await fetchPictures(pictureName, page);
-
-    //     this.setState({
-    //       pictures: data.hits,
-    //     });
-    //     if (data.hits.length < 12) {
-    //       console.log(page);
-    //       this.setState({ showBtn: false });
-    //     }
-    //   } catch (error) {
-    //     this.setState({ error });
-    //   } finally {
-    //     this.setState({ loading: false });
-    //   }
-    // }
   }
 
   handleFormSubmit = pictureName => {
