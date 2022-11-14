@@ -18,25 +18,43 @@ export function App() {
   const [showBtn, setShowBtn] = useState(false);
   const [ImageURL, setImageURL] = useState('');
 
+  console.log(showBtn);
+
   useEffect(() => {
-    async function Api() {
-      try {
-        const data = await fetchPictures(pictureName, page);
-        setLoading(true);
-        setError(null);
-        setPage(page);
-        setPictures(prevState => [...prevState, ...data.hits]);
-        setShowBtn(true);
+    fetchPictures(pictureName, page)
+      .then(data => {
+        if (pictureName) {
+          setLoading(true);
+          setError(null);
+          setPage(page);
+          setPictures(prevState => [...prevState, ...data.hits]);
+          setShowBtn(true);
+        }
+
         if (data.hits.length < 12) {
           setShowBtn(false);
         }
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-        console.log(error);
-      }
-    }
-    Api();
+      })
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false));
+    // async function Api() {
+    //   try {
+    //     const data = await fetchPictures(pictureName, page);
+    //     setLoading(true);
+    //     setError(null);
+    //     setPage(page);
+    //     setPictures(prevState => [...prevState, ...data.hits]);
+    //     setShowBtn(true);
+    //     if (data.hits.length < 12) {
+    //       setShowBtn(false);
+    //     }
+    //   } catch (error) {
+    //     setError(error.message);
+    //     setLoading(false);
+    //     console.log(error);
+    //   }
+    // }
+    // Api();
   }, [page, pictureName]);
 
   const handleFormSubmit = pictureName => {
@@ -45,7 +63,7 @@ export function App() {
     setError(null);
     setPictures([]);
     setPage(1);
-    setShowBtn(true);
+    setShowBtn(false);
   };
 
   const loadMore = () => {
@@ -56,15 +74,18 @@ export function App() {
     setShowModal(!showModal);
     setImageURL(largeImageURL);
   };
+
   return (
     <div>
       <Searchbar dataForm={handleFormSubmit} />
-      <ImageGallery pictures={pictures} toggleModal={toggleModal} />
+      {pictureName && (
+        <ImageGallery pictures={pictures} toggleModal={toggleModal} />
+      )}
       {loading && <Loader />}
-
       {!loading && showBtn && pictures.length !== 0 && (
         <ButtonAPI onClick={loadMore} />
       )}
+
       {showModal && <Modal largeImageURL={ImageURL} onClick={toggleModal} />}
       <ToastContainer autoClose={2000} />
     </div>
