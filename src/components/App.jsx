@@ -12,7 +12,7 @@ export function App() {
   const [pictureName, setPictureName] = useState('');
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [showBtn, setShowBtn] = useState(false);
@@ -25,7 +25,7 @@ export function App() {
       .then(data => {
         if (pictureName) {
           setLoading(true);
-          setError(null);
+          // setError(null);
           setPage(page);
           setPictures(prevState => [...prevState, ...data.hits]);
           setShowBtn(true);
@@ -42,7 +42,7 @@ export function App() {
   const handleFormSubmit = pictureName => {
     setPictureName(pictureName);
     setLoading(true);
-    setError(null);
+    // setError(null);
     setPictures([]);
     setPage(1);
     setShowBtn(false);
