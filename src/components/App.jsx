@@ -37,24 +37,6 @@ export function App() {
       })
       .catch(error => console.log(error))
       .finally(() => setLoading(false));
-    // async function Api() {
-    //   try {
-    //     const data = await fetchPictures(pictureName, page);
-    //     setLoading(true);
-    //     setError(null);
-    //     setPage(page);
-    //     setPictures(prevState => [...prevState, ...data.hits]);
-    //     setShowBtn(true);
-    //     if (data.hits.length < 12) {
-    //       setShowBtn(false);
-    //     }
-    //   } catch (error) {
-    //     setError(error.message);
-    //     setLoading(false);
-    //     console.log(error);
-    //   }
-    // }
-    // Api();
   }, [page, pictureName]);
 
   const handleFormSubmit = pictureName => {
