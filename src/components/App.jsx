@@ -18,8 +18,6 @@ export function App() {
   const [showBtn, setShowBtn] = useState(false);
   const [ImageURL, setImageURL] = useState('');
 
-  console.log(showBtn);
-
   useEffect(() => {
     fetchPictures(pictureName, page)
       .then(data => {
